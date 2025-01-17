@@ -10,7 +10,7 @@ class QueueHooksController
     {
         $payload = $request->input('payload');
 
-        $results = QueueProcessor::handle(Arr::get($payload, 'laravel_job'));
+        $results = QueueProcessor::handle(Arr::get($payload, 'laravel_job'), $request->input('id'));
 
         return response()->json([
             'status' => 'success',
