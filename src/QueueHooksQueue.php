@@ -69,7 +69,7 @@ class QueueHooksQueue extends Queue implements QueueContract
 
     protected function executeJob($job, $data = '', $queue = null)
     {
-        $queue = $queue ?: $this->getQueue($queue);
+        $queue = $this->getQueue($queue);
 
         if (empty($queue)) {
             if (config('queuehooks.default_queue')) {
@@ -100,7 +100,7 @@ class QueueHooksQueue extends Queue implements QueueContract
 
     private function executeScheduledJob(Carbon $processAt, $job, $data, $queue)
     {
-        $queue = $queue ?: $this->getQueue($queue);
+        $queue = $this->getQueue($queue);
 
         if (empty($queue)) {
             if (config('queuehooks.default_queue')) {

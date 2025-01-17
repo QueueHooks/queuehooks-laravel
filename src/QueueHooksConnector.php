@@ -3,6 +3,7 @@
 namespace Queuehooks\QueuehooksLaravel;
 
 use Illuminate\Queue\Connectors\ConnectorInterface;
+use Illuminate\Support\Arr;
 
 class QueueHooksConnector implements ConnectorInterface
 {
@@ -14,6 +15,6 @@ class QueueHooksConnector implements ConnectorInterface
      */
     public function connect(array $config)
     {
-        return new QueueHooksQueue($config['queue'], $config['after_commit'] ?? null);
+        return new QueueHooksQueue(Arr::get($config, 'queue'), $config['after_commit'] ?? null);
     }
 }
