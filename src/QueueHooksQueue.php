@@ -84,7 +84,7 @@ class QueueHooksQueue extends Queue implements QueueContract
 
         $response = Http::withToken(config('queuehooks.token'))
             ->retry(3, 1000)
-            ->post(config('queuehooks.server') . '/ingest', [
+            ->post(config('queuehooks.server') . '/', [
                 'nonce'       => $nonce,
                 'payload'     => ['laravel_job' => serialize($job)],
                 //queue job class name
@@ -115,7 +115,7 @@ class QueueHooksQueue extends Queue implements QueueContract
 
         return Http::withToken(config('queuehooks.token'))
             ->retry(3, 1000)
-            ->post(config('queuehooks.server') . '/ingest', [
+            ->post(config('queuehooks.server') . '/', [
                 'nonce'       => $nonce,
                 'payload'     => ['laravel_job' => serialize($job)],
                 //queue job class name
