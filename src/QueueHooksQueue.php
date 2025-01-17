@@ -15,14 +15,17 @@ use Throwable;
 
 class QueueHooksQueue extends Queue implements QueueContract
 {
+    protected $default;
+
     /**
      * Create a new sync queue instance.
      *
      * @param bool $dispatchAfterCommit
      * @return void
      */
-    public function __construct($dispatchAfterCommit = false)
+    public function __construct($default, $dispatchAfterCommit = false)
     {
+        $this->default = $default;
         $this->dispatchAfterCommit = $dispatchAfterCommit;
     }
 
@@ -255,5 +258,10 @@ class QueueHooksQueue extends Queue implements QueueContract
                 $this->push($job, $data, $queue);
             }
         }
+    }
+
+    public function getQueue($queue)
+    {
+        return $queue ?: $this->default;
     }
 }

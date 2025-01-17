@@ -15,7 +15,7 @@ class QueueProcessor
             $result = $job->handle();
         } catch (\Exception $e) {
             if ($job->batchId) {
-
+                $job->batch()->decrementPendingJobs($job->batchId, $jobId);
                 $job->batch()->recordFailedJob($jobId, $e);
 
 //                DB::connection(config('queue.batching.database'))

@@ -14,6 +14,6 @@ class QueueHooksConnector implements ConnectorInterface
      */
     public function connect(array $config)
     {
-        return new QueueHooksQueue($config['after_commit'] ?? null);
+        return new QueueHooksQueue($config['queue'], $config['after_commit'] ?? null);
     }
 }
